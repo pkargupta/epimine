@@ -1,8 +1,12 @@
-# EpiMine: Unsupervised Episode Detection for Large-Scale News Events
-<!--<br>Priyanka Kargupta, Yunyi Zhang, Yizhu Jiao, Siru Ouyang, Jiawei Han</a>-->
+# EpiMine: Synergizing Unsupervised Episode Detection with LLMs for Large-Scale News Events
+<br>Priyanka Kargupta, Yunyi Zhang, Yizhu Jiao, Siru Ouyang, Jiawei Han</a>
+
+
+Official implementation for [ACL 2025](https://2025.aclweb.org/) main track paper: [Synergizing Unsupervised Episode Detection with LLMs for Large-Scale News Events](https://arxiv.org/abs/2408.04873).
+
 ![Framework Diagram of EpiMine](https://github.com/pkargupta/epimine/blob/main/framework.png)
 
-Given the saturation of real-time news accessible at our fingertips, processing the critical information of a key event has increasingly become a daunting challenge. Consequently, research on automatic event detection has only recently sought to address this issue by exploiting the hierarchical structure in which humans perceive realworld events: from themes (e.g.“2019 Hong Kong Protests”) down to key events (“July 1 Storming Legislative Building”), episodes (“protesters vandalized the Legislative Chamber”), and concrete atomic actions (“Protesters spray-painted slogans on the walls”). However, current methods fail to consider the episode level, despite humans neurologically encoding events within episodic structures and hence being the most intuitive event granularity to process. In this paper, we propose a novel task, episode detection, which seeks to detect episodes from a news corpus containing key event articles. An episode can describe a cohesive cluster of core entities (e.g., “protesters”, “police”) performing actions at a certain time and location. Additionally, an episode occurs as a significant component of a larger group of episodes that fall under a specific key event. In addition to serving as a more interpretable event granularity, automatically detecting episodes serves to be a challenging task given that, unlike at the key event and atomic action level, we cannot rely on having a specific time or location explicitly mentioned for each episode, and each key event article may feature only a subset of all episodes and/or describe the core entities and actions inconsistently. To address these challenges, we introduce EpiMine, an unsupervised episode detection framework that (1) automatically identifies the most salient, key-event-relevant terms and segments, (2) determines candidate episodes in an article based on natural episodic partitions estimated through shifts in discriminative term combinations, and (3) utilizes these candidate episodes and large language model-based reasoning to refine and form the final episode clusters. EpiMine is shown to often outperform all baselines through extensive experiments and case studies performed on three diverse real-world themes and thirty real-world key news event corpora.
+State-of-the-art automatic event detection struggles with interpretability and adaptability to evolving large-scale key events---unlike episodic structures, which excel in these areas. Often overlooked, episodes represent cohesive clusters of core entities performing actions at a specific time and location; a partially ordered sequence of episodes can represent a key event. This paper introduces a novel task, episode detection, which identifies episodes within a news corpus of key event articles. Detecting episodes poses unique challenges, as they lack explicit temporal or locational markers and cannot be merged using semantic similarity alone. While large language models (LLMs) can aid with these reasoning difficulties, they suffer with long contexts typical of news corpora. To address these challenges, we introduce EpiMine, an unsupervised framework that identifies a key event's candidate episodes by leveraging natural episodic partitions in articles, estimated through shifts in discriminative term combinations. These candidate episodes are more cohesive and representative of true episodes, synergizing with LLMs to better interpret and refine them into final episodes. We apply EpiMine to our three diverse, real-world event datasets annotated at the episode level, where it achieves a 59.2% average gain across all metrics compared to baselines.
 
 ## Setup
 We use `python=3.8`, `torch=1.12.1`, `cudatoolkit=12.0` (also works on 11.3), and a single NVIDIA GeForce GTX 1080. Other packages can be installed using:
@@ -32,3 +36,20 @@ The following are the primary arguments for EpiMine (defined in run.py; modify a
 - `num` $\rightarrow$ default=5; Number of ground truth episodes for theme/key event.
 - `trials` $\rightarrow$ default=10
 - `api_key` $\rightarrow$ Anthropic API Key
+
+## Dataset
+We provide all segmented articles for each key event in `episode_dataset/[theme]/[key_event]/[key_event]_segmented_raw.txt`. We also provide all episode-annotated articles in `groundtruth/[key_event]_groundtruth.txt`. All episode descriptions (used for article episode annotation) are provided in `groundtruth/key_event_episode_descriptions.xlsx`.
+
+
+## 📖 Citations
+Please cite the paper and star this repo if you use ClaimSpect and find it interesting/useful, thanks! Feel free to open an issue if you have any questions.
+
+```bibtex
+@inproceedings{
+	kargupta2024unsupervised,
+	title={Synergizing Unsupervised Episode Detection with LLMs for Large-Scale News Events},
+	author={Kargupta, Priyanka and Zhang, Yunyi and Jiao, Yizhu and Ouyang, Siru and Han, Jiawei},
+	journal={arXiv preprint arXiv:2408.04873},
+	year={2025}
+}
+```
