@@ -42,7 +42,7 @@ We provide all segmented articles for each key event in `episode_dataset/[theme]
 
 
 ## 📖 Citations
-Please cite the paper and star this repo if you use ClaimSpect and find it interesting/useful, thanks! Feel free to open an issue if you have any questions.
+Please cite the paper and star this repo if you use EpiMine and find it interesting/useful, thanks! Feel free to open an issue if you have any questions.
 
 ```bibtex
 @inproceedings{
