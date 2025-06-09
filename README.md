@@ -45,7 +45,7 @@ We provide all segmented articles for each key event in `episode_dataset/[theme]
 Please cite the paper and star this repo if you use EpiMine and find it interesting/useful, thanks! Feel free to open an issue if you have any questions.
 
 ```bibtex
-@inproceedings{
+@article{
 	kargupta2024unsupervised,
 	title={Synergizing Unsupervised Episode Detection with LLMs for Large-Scale News Events},
 	author={Kargupta, Priyanka and Zhang, Yunyi and Jiao, Yizhu and Ouyang, Siru and Han, Jiawei},
